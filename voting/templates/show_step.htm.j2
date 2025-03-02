@@ -1,0 +1,18 @@
+{% extends "template.htm.j2" %}
+
+{% block main %}
+    <h1>Voting-Game!</h1>
+    {% for step in steps %}
+        <hr>
+        <h3>{{step.header | replace('\n','<br>')}}</h3>
+        <img src="{{url_for('static', filename=step.description)}}" width=500px>
+        <ul>
+        {% for answer in answers %}
+            {% if answer.step_id == step.id %}
+                <li><a href="/vote/{{answer.id}}">{{answer.description}} <br> Votes: {{answer.votes}}</a></li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+    {% endfor %}
+
+{% endblock %}
